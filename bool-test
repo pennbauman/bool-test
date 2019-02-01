@@ -1,18 +1,4 @@
 #!/bin/sh
 # Boolean Tester Runner
 
-if [ $1 -eq "--help" ] || [ $1 -eq "-help" ]; then 
-    echo "Boolean Expesion Truth Table and Equivilence Tester"
-    echo ""
-    echo "Format: "
-    echo "  bool-test [expresion]"
-    echo ""
-    echo "Supported Boolean Operations:"
-    echo "  +   OR"
-    echo "  *   AND"
-    echo "  !   NOT"
-    echo "  xor XOR"
-    echo "  ()  Forcing order of operations"
-else
-    python /usr/share/bool-test/boolean-tester.py $@
-fi
+python /usr/share/bool-test/boolean-tester.py $@

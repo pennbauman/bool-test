@@ -1,0 +1,16 @@
+Boolean Expession Truth Table and Equivilence Tester
+Format: bool-test [help]
+
+Then enter expesssions you would like to test, one per line. Enter a blank expression to start testing. 
+
+Supported Boolean Operations:
+  !,~,NOT  Inversion
+  *,&,AND  Conjunction
+    xy     Two variable placed adjacent to each other assume AND
+  +,|, OR  Disjunction
+      XOR  Exclusive OR 
+     NAND  NOT AND 
+      NOR  NOT OR 
+  =, XNOR  NOT XOR, Equivilence
+  ()       Forces order of operations
+
