@@ -111,6 +111,7 @@ print("Enter expessions or 'help' for more information.")
 for i in range(10):
     s = input("f" + str(i) + " = ")
     if (s == ""):
+        print("")
         break
     elif (s == "help"):
         helpPrint()
@@ -140,8 +141,8 @@ for i in range(len(equality)):
 
 line = ""
 for val in variables:
-    line += (" {:2s}").format(val)
-line += "Num "
+    line += (" {:s}").format(val)
+line += " Num "
 for i in range(len(statements)):
     line += ("{:3s}").format("f" + str(i))
 print(line)
@@ -151,8 +152,8 @@ inputsDict = {"0":False, "1":True}
 while True: 
     line = ""
     for v in inputs:
-        line = ("{:2b} ").format(v) + line
-    line += ("{:3n}").format(num)
+        line = ("{:2b}").format(v) + line
+    line += (" {:3n}").format(num)
 
     for i in range(len(inputs)):
         inputsDict[variables[i]] = inputs[len(inputs)-1-i]
