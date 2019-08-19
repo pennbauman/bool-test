@@ -2,33 +2,32 @@
 Python tool to general truth tables for boolean expersions
 
 ## Usage
-Enter expesssions you would like to test, one per line. Enter a blank expression to start testing. 
+Enter expesssions you would like to test, one per line. Enter a blank expression to start testing. Expressions must use lower case single letter variables and can use the following operations:
 
-Supported Boolean Operations:
-| Sysbol | Usage |
-| -----: | :---- |
+|   Symbol | Usage |
+| -------: | :---- |
 |  !,~,NOT | Inversion |
-|  *,&,AND | Conjunction |
-|    xy    | Two variable placed adjacent to each other assume AND |
+|   *,&,AND | Conjunction |
+|       xy | Two variable placed adjacent to each other assume AND |
 |  +,|, OR | Disjunction |
 |      XOR | Exclusive OR  |
 |     NAND | NOT AND  |
 |      NOR | NOT OR  |
 |  =, XNOR | NOT XOR, Equivilence |
-|  ()      | Forces order of operations |
+|       () | Forces order of operations |
 
 ## Installation
 
 #### Linux
-Run: 
+Run (requires root access): 
 
     ./install.sh
 
-and you can then use:
+and you can then run:
 
     bool-test
 
-in any command line to run the tool.
+to run the tool.
 
-#### Windows & Mac OS
+#### Windows & Mac OS (or Linux without install)
 Just run the python script by your prefered method.
