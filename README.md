@@ -6,15 +6,15 @@ Enter expesssions you would like to test, one per line. Enter a blank expression
 
 |   Symbol | Usage |
 | -------: | :---- |
-|  !,~,NOT | Inversion |
-|   *,&,AND | Conjunction |
-|       xy | Two variable placed adjacent to each other assume AND |
-|  +,|, OR | Disjunction |
-|      XOR | Exclusive OR  |
-|     NAND | NOT AND  |
-|      NOR | NOT OR  |
-|  =, XNOR | NOT XOR, Equivilence |
-|       () | Forces order of operations |
+| `! ~ NOT` | Inversion |
+| `* & AND` | Conjunction |
+|      `xy` | Two variable placed adjacent to each other assume AND |
+|  `+ | OR` | Disjunction |
+|     `XOR` | Exclusive OR  |
+|    `NAND` | NOT AND  |
+|     `NOR` | NOT OR  |
+|  `= XNOR` | NOT XOR, Equivilence |
+|      `()` | Forces order of operations |
 
 ## Installation
 
