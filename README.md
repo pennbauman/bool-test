@@ -9,7 +9,7 @@ Enter expesssions you would like to test, one per line. Enter a blank expression
 | `! ~ NOT` | Inversion |
 | `* & AND` | Conjunction |
 |      `xy` | Two variable placed adjacent to each other assume AND |
-|  `+ | OR` | Disjunction |
+| `+ \| OR` | Disjunction |
 |     `XOR` | Exclusive OR  |
 |    `NAND` | NOT AND  |
 |     `NOR` | NOT OR  |
