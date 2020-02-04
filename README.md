@@ -26,7 +26,7 @@ Print out formatted expressions, this is the default when expressions are entere
 ### Expressions
 Expressions can either be entered as command line parameters or when prompted. When entering expressions into the prompt you can start evaluation by entering '#' or 'done'.
 
-Expressions are composed of variables (any lowercase English letter) and operaters. Operators must be all uppercase, and are listed in their order of evaluation. Two variables placed directly next to eachother will be assume to have and `AND` operater between them.
+Expressions are composed of variables (any lowercase English letter) and operators. Operators must be all uppercase, and are listed in their order of evaluation. Two variables placed directly next to each other will be assume to have and `AND` operator between them.
 
 | Operator  | Usage |
 | --------: | :---- |
@@ -36,7 +36,7 @@ Expressions are composed of variables (any lowercase English letter) and operate
 | `AND` `&` `*` | Conjunction |
 | `NOR`     | Negated disjunction (not or) |
 | `OR` `\|` `+`  | Disjunction |
-| `XNOR` `=`  | Equivilence or negated exclusive or (not xor) |
+| `XNOR` `=`  | Equivalence or negated exclusive or (not xor) |
 | `XOR`     | Exclusive or |
 
 

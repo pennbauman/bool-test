@@ -25,7 +25,7 @@ void printHelp() {
 	cout << "Expressions: " << endl;
 	cout << "  Expressions can either be entered as command line parameters or when prompted." << endl;
 	cout << "  When entering expressions into the prompt you can start evaluation by entering '#' or 'done'." << endl;
-	cout << "  Expressions are composed of variables (any lowercase English letter) and operaters." << endl;
+	cout << "  Expressions are composed of variables (any lowercase English letter) and operators." << endl;
 	cout << "  Operators must be all uppercase, and are listed in their order of evaluation." << endl;
 	cout << "    ()       Forces order of evaluation" << endl;
 	cout << "    NOT ! ~  Negation" << endl;
@@ -33,7 +33,7 @@ void printHelp() {
 	cout << "    AND & *  Conjunction" << endl;
 	cout << "    NOR      Negated disjunction (not or)" << endl;
 	cout << "    OR | +   Disjunction" << endl;
-	cout << "    XNOR =   Equivilence or negated exclusive or (not xor)" << endl;
+	cout << "    XNOR =   Equivalence or negated exclusive or (not xor)" << endl;
 	cout << "    XOR      Exclusive or" << endl;
 }
 
