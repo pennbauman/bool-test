@@ -320,7 +320,7 @@ int main(int argc, char* argv[]) {
 	for (int i = 1; i < argc; i++) {
 		current = argv[i];
 		if (current == "--version") {
-			cout << "Boolean Tester version 0.1" << endl;
+			cout << "Boolean Tester version 0.2" << endl;
 			return 0;
 		} else if ((current == "--help") || (current == "-h")) {
 			printHelp();
