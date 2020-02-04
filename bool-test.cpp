@@ -29,12 +29,12 @@ void printHelp() {
 	cout << "  Operators must be all uppercase, and are listed in their order of evaluation." << endl;
 	cout << "    ()       Forces order of evaluation" << endl;
 	cout << "    NOT,!,~  Negation" << endl;
-	cout << "    NAND     Negated conjunction (NOT AND)" << endl;
+	cout << "    NAND     Negated conjunction (not and)" << endl;
 	cout << "    AND,&,*  Conjunction" << endl;
-	cout << "    NOR      Negated disjunction (NOT OR)" << endl;
+	cout << "    NOR      Negated disjunction (not or)" << endl;
 	cout << "    OR,|,+   Disjunction" << endl;
-	cout << "    XNOR,=   Equivilence, or negated exclusive OR (NOT XOR)" << endl;
-	cout << "    XOR      Exclusive OR" << endl;
+	cout << "    XNOR,=   Equivilence, or negated exclusive or (not xor)" << endl;
+	cout << "    XOR      Exclusive or" << endl;
 }
 
 // Recursive construct parse-tree
