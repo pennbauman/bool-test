@@ -16,13 +16,13 @@ Once installed, the boolean tester can be used by running:
 `--version`
 Prints version information.
 
-`--help` `-h`
+`--help` or `-h`
 Prints a help menu.
 
-`--verbose` `-v`
+`--verbose` or `-v`
 Print out formatted expressions, this is the default when expressions are entered as command line parameters/
 
-`--no-compare` `-n`
+`--no-compare` or `-n`
 Stop printing of a list of expression equalities after the truth table.
 
 
