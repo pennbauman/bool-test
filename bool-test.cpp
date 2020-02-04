@@ -28,12 +28,12 @@ void printHelp() {
 	cout << "  Expressions are composed of variables (any lowercase English letter) and operaters." << endl;
 	cout << "  Operators must be all uppercase, and are listed in their order of evaluation." << endl;
 	cout << "    ()       Forces order of evaluation" << endl;
-	cout << "    NOT,!,~  Negation" << endl;
+	cout << "    NOT ! ~  Negation" << endl;
 	cout << "    NAND     Negated conjunction (not and)" << endl;
-	cout << "    AND,&,*  Conjunction" << endl;
+	cout << "    AND & *  Conjunction" << endl;
 	cout << "    NOR      Negated disjunction (not or)" << endl;
-	cout << "    OR,|,+   Disjunction" << endl;
-	cout << "    XNOR,=   Equivilence, or negated exclusive or (not xor)" << endl;
+	cout << "    OR | +   Disjunction" << endl;
+	cout << "    XNOR =   Equivilence or negated exclusive or (not xor)" << endl;
 	cout << "    XOR      Exclusive or" << endl;
 }
 
@@ -41,16 +41,16 @@ void printHelp() {
 node* parse(string s) {
 	//cout << "parse: " << s << endl;
 	/* Order of operations
-	 *   reverse in if statements
-	 * NOT
-	 * NAND
-	 * AND
-	 * NOR
-	 * OR
-	 * EQV, XNOR
-	 * XOR
-	 * IMP, not implemented
-	 */
+	*   reverse in if statements
+	* NOT
+	* NAND
+	* AND
+	* NOR
+	* OR
+	* EQV, XNOR
+	* XOR
+	* IMP, not implemented
+	*/
 	node* fin = new node;
 	int p;
 	// Single variables
