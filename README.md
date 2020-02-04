@@ -2,7 +2,7 @@
 Command line tool to generate truth table for boolean expressions
 
 ## Installation
-On Linux run the following in the dndice directory, it requires root access:
+On Linux run the following in the bool-test directory, it requires root access:
 
 	./install.sh
 
