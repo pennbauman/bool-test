@@ -15,8 +15,10 @@ Once installed, the boolean tester can be used by running:
 ### Options
 `--version`
 Prints version information.
+
 `--help, -h`
 Prints a help menu.
+
 `--verbose, -v`
 Print out formatted expressions, this is the default when expressions are entered as command line parameters/
 
@@ -29,12 +31,12 @@ Expressions are composed of variables (any lowercase English letter) and operate
 | Operator  | Usage |
 | --------: | :---- |
 | `()`      | Forces order of evaluation |
-| `NOT,!,~` | Negation |
+| `NOT` `!` `~` | Negation |
 | `NAND`    | Negated conjunction (NOT AND) |
-| `AND,&,*` | Conjunction |
+| `AND` `&` `*` | Conjunction |
 | `NOR`     | Negated disjunction (NOT OR) |
-| `OR,|,+`  | Disjunction |
-| `XNOR,=`  | Equivilence, or negated exclusive OR (NOT XOR) |
+| `OR` `|` `+`  | Disjunction |
+| `XNOR` `=`  | Equivilence` ` or negated exclusive OR (NOT XOR) |
 | `XOR`     | Exclusive OR |
 
 
