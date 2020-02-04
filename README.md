@@ -16,15 +16,18 @@ Once installed, the boolean tester can be used by running:
 `--version`
 Prints version information.
 
-`--help, -h`
+`--help` `-h`
 Prints a help menu.
 
-`--verbose, -v`
+`--verbose` `-v`
 Print out formatted expressions, this is the default when expressions are entered as command line parameters/
+
+`--no-compare` `-n`
+Stop printing of a list of expression equalities after the truth table.
 
 
 ### Expressions
-Expressions can either be entered as command line parameters or when prompted. When entering expressions into the prompt you can start evaluation by entering '#' or 'done'.
+Expressions can either be entered as command line parameters or when prompted. When entering expressions into the prompt you can start evaluation by entering a blank.
 
 Expressions are composed of variables (any lowercase English letter) and operators. Operators must be all uppercase, and are listed in their order of evaluation. Two variables placed directly next to each other will be assume to have and `AND` operator between them.
 

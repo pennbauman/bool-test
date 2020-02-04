@@ -18,28 +18,29 @@ struct node {
 // Print help information
 void printHelp() {
 	cout << "Usage: bool-test [options] [expressions]" << endl;
-	cout << "  --version      Prints version information" << endl;
-	cout << "  --help, -h     Print this help menu" << endl;
-	cout << "  --verbose, -v  Print out formatted expressions, default with command line input" << endl;
+	cout << "  --version         Prints version information" << endl;
+	cout << "  --help, -h        Print this help menu" << endl;
+	cout << "  --verbose, -v     Print out formatted expressions, default with command line input" << endl;
+	cout << "  --no-compare, -n  Removes expression comparisions after the truth table" << endl;
 	cout << endl;
 	cout << "Expressions: " << endl;
 	cout << "  Expressions can either be entered as command line parameters or when prompted." << endl;
-	cout << "  When entering expressions into the prompt you can start evaluation by entering '#' or 'done'." << endl;
+	cout << "  When entering expressions into the prompt you can start evaluation by entering a blank." << endl;
 	cout << "  Expressions are composed of variables (any lowercase English letter) and operators." << endl;
 	cout << "  Operators must be all uppercase, and are listed in their order of evaluation." << endl;
-	cout << "    ()       Forces order of evaluation" << endl;
-	cout << "    NOT ! ~  Negation" << endl;
-	cout << "    NAND     Negated conjunction (not and)" << endl;
-	cout << "    AND & *  Conjunction" << endl;
-	cout << "    NOR      Negated disjunction (not or)" << endl;
-	cout << "    OR | +   Disjunction" << endl;
-	cout << "    XNOR =   Equivalence or negated exclusive or (not xor)" << endl;
-	cout << "    XOR      Exclusive or" << endl;
+	cout << "    ()         Forces order of evaluation" << endl;
+	cout << "    NOT, !, ~  Negation" << endl;
+	cout << "    NAND       Negated conjunction (not and)" << endl;
+	cout << "    AND, &, *  Conjunction" << endl;
+	cout << "    NOR        Negated disjunction (not or)" << endl;
+	cout << "    OR, |, +   Disjunction" << endl;
+	cout << "    XNOR, =    Equivalence or negated exclusive or (not xor)" << endl;
+	cout << "    XOR        Exclusive or" << endl;
 }
 
 // Recursive construct parse-tree
 node* parse(string s) {
-	//cout << "parse: " << s << endl;
+	//cout << "parse: '" << s << "'" << endl;
 	/* Order of operations
 	*   reverse in if statements
 	* NOT
@@ -51,6 +52,8 @@ node* parse(string s) {
 	* XOR
 	* IMP, not implemented
 	*/
+	if (s.size() == 0)
+		return NULL;
 	node* fin = new node;
 	int p;
 	// Single variables
@@ -71,7 +74,7 @@ node* parse(string s) {
 
 	// XOR
 	p = 0;
-	for (int i = 0; i < s.size(); i++) {
+	for (int i = 1; i < s.size()-1; i++) {
 		if (s[i] == '(')
 			p++;
 		if (s[i] == ')')
@@ -89,7 +92,7 @@ node* parse(string s) {
 	}
 	// EQV, XNOR
 	p = 0;
-	for (int i = 0; i < s.size(); i++) {
+	for (int i = 1; i < s.size()-1; i++) {
 		if (s[i] == '(')
 			p++;
 		if (s[i] == ')')
@@ -115,7 +118,7 @@ node* parse(string s) {
 	}
 	// OR
 	p = 0;
-	for (int i = 0; i < s.size(); i++) {
+	for (int i = 1; i < s.size()-1; i++) {
 		if (s[i] == '(')
 			p++;
 		if (s[i] == ')')
@@ -141,7 +144,7 @@ node* parse(string s) {
 	}
 	// NOR
 	p = 0;
-	for (int i = 0; i < s.size(); i++) {
+	for (int i = 1; i < s.size()-1; i++) {
 		if (s[i] == '(')
 			p++;
 		if (s[i] == ')')
@@ -159,7 +162,7 @@ node* parse(string s) {
 	}
 	// AND
 	p = 0;
-	for (int i = 0; i < s.size(); i++) {
+	for (int i = 1; i < s.size()-1; i++) {
 		if (s[i] == '(')
 			p++;
 		if (s[i] == ')')
@@ -185,7 +188,7 @@ node* parse(string s) {
 	}
 	// NAND
 	p = 0;
-	for (int i = 0; i < s.size(); i++) {
+	for (int i = 1; i < s.size()-1; i++) {
 		if (s[i] == '(')
 			p++;
 		if (s[i] == ')')
@@ -203,7 +206,7 @@ node* parse(string s) {
 	}
 	// NOT
 	if ((s[0] == '!') || (s[0] == '~')) {
-		if (s.size() == 2) {
+		if ((s.size() == 2) || (s[1] == '(')) {
 			fin->data = "NOT";
 			fin->left = NULL;
 			fin->right = parse(s.substr(1));
@@ -220,7 +223,7 @@ node* parse(string s) {
 		}
 	}
 	if (s.substr(0,3) == "NOT") {
-		if (s.size() == 4) {
+		if ((s.size() == 4) || (s[3] == '(')) {
 			fin->data = "NOT";
 			fin->left = NULL;
 			fin->right = parse(s.substr(4));
@@ -237,6 +240,8 @@ node* parse(string s) {
 		}
 	}
 	// Symbolless AND
+	if (s.size() < 2)
+		return NULL;
 	fin->data = "AND";
 	fin->left = parse(s.substr(0,1));
 	fin->right = parse(s.substr(1));
@@ -301,6 +306,7 @@ int main(int argc, char* argv[]) {
 	vector<node*> trees;
 	bool options[] = {
 		false, // --verbose, -v
+		true, // --no-compate, -n
 	};
 	for (int i = 1; i < argc; i++) {
 		current = argv[i];
@@ -312,6 +318,8 @@ int main(int argc, char* argv[]) {
 			return 0;
 		} else if ((current == "--verbose") || (current == "-v")) {
 			options[0] = true;
+		} else if ((current == "--no-compare") || (current == "-n")) {
+			options[1] = false;
 		} else {
 			for (int i = 0; i < current.size(); i++) {
 				if (current[i] == ' ') {
@@ -320,7 +328,7 @@ int main(int argc, char* argv[]) {
 				}
 			}
 			trees.push_back(parse(current));
-			if (trees[i-1] == NULL) {
+			if (trees[trees.size()-1] == NULL) {
 				cout << "ERROR: Syntax in '" << current << "' is not interpretable" << endl;
 				return 1;
 			}
@@ -336,16 +344,20 @@ int main(int argc, char* argv[]) {
 		cout << "Enter expressions to test:" << endl;
 		for (int i = 0; i < 10; i++) {
 			cout << "f" << i << " = ";
-			cin >> current;
-			if ((current == "#") || (current == "done"))
-				break;
+			getline(cin, current);
 			for (int i = 0; i < current.size(); i++) {
 				if (current[i] == ' ') {
 					current = current.substr(0,i) + current.substr(i+1);
 					i--;
 				}
 			}
+			if (current == "")
+				break;
 			trees.push_back(parse(current));
+			if (trees[i] == NULL) {
+				cout << "ERROR: Syntax in '" << current << "' is not interpretable" << endl;
+				return 1;
+			}
 			total += current;
 		}
 	}
@@ -395,6 +407,13 @@ int main(int argc, char* argv[]) {
 	cout << endl;
 
 	// Iterate over combinations and compute
+	bool equal[trees.size()-1][trees.size()-1];
+	for (int i = 0; i < trees.size()-1; i++) {
+		for (int j = i; j < trees.size()-1; j++) {
+			equal[i][j] = true;
+		}
+	}
+	bool results[trees.size()];
 	bool done;
 	int num = 0;
 	while (true) {
@@ -406,9 +425,17 @@ int main(int argc, char* argv[]) {
 		num++;
 		// Evaluate parse-trees for current combination
 		for (int i = 0; i < trees.size(); i++) {
-			cout << "  " << evaluate(trees[i], vars_values);
+			results[i] = evaluate(trees[i], vars_values);
+			cout << "  " << results[i];
 		}
 		cout << endl;
+
+		// Check expression equalities
+		for (int i = 0; i < trees.size()-1; i++) {
+			for (int j = i; j < trees.size()-1; j++) {
+				equal[i][j] = equal[i][j] && (results[i] == results[j+1]);
+			}
+		}
 
 		// Move to next combination, and check final state
 		done = true;
@@ -423,6 +450,22 @@ int main(int argc, char* argv[]) {
 		}
 		if (done)
 			break;
+	}
+
+	if (options[1]) {
+		cout << endl;
+		// Print funtion equalities
+		for (int i = 0; i < trees.size()-1; i++) {
+			for (int j = i; j < trees.size()-1; j++) {
+				cout << "f" << i;
+				if (equal[i][j]) {
+					cout << " == ";
+				} else {
+					cout << " != ";
+				}
+				cout << "f" << j+1 << endl;
+			}
+		}
 	}
 
 	return 0;
