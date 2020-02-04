@@ -267,6 +267,15 @@ void printTree(node* n) {
 		cout << ")";
 }
 
+// Delete tree
+void deleteTree(node* root) {
+	if (root == NULL)
+		return
+	deleteTree(root->left);
+	deleteTree(root->right);
+	delete root;
+}
+
 // Evaluate parse-tree recursively
 bool evaluate(node* n, bool vars[]) {
 	// NULL node error (should never happen)
@@ -452,9 +461,14 @@ int main(int argc, char* argv[]) {
 			break;
 	}
 
+	// Clean up memory
+	for (int i = 0; i < trees.size(); i++) {
+		deleteTree(trees[i]);
+	}
+
+	// Print funtion equalities
 	if (options[1]) {
 		cout << endl;
-		// Print funtion equalities
 		for (int i = 0; i < trees.size()-1; i++) {
 			for (int j = i; j < trees.size()-1; j++) {
 				cout << "f" << i;
