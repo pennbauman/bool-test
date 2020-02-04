@@ -1,4 +1,0 @@
-#!/bin/sh
-# Boolean Tester Runner
-
-python /usr/share/bool-test/boolean-tester.py $@
