@@ -374,9 +374,6 @@ int main(int argc, char* argv[]) {
 				cout << "ERROR: Syntax in '" << current << "' is not interpretable" << endl;
 				return 1;
 			}
-			//cout << "f" << i << " = ";
-			//printTree(trees[i-1]);
-			//cout << endl;
 			total += current;
 		}
 	}
@@ -451,7 +448,6 @@ int main(int argc, char* argv[]) {
 	// Iterate over combinations and compute
 	bool equal[trees.size()-1][trees.size()-1];
 	if (options[1]) {
-		//cout << "trees = " << trees.size() << endl;
 		for (int i = 0; i < trees.size()-1; i++) {
 			for (int j = i; j < trees.size()-1; j++) {
 				equal[i][j] = true;
@@ -504,15 +500,13 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < trees.size(); i++) {
 		deleteTree(trees[i]);
 	}
-	//cout << "deleted" << endl;
 
 	// Print funtion equalities
 	if (options[1]) {
 		cout << endl;
-		cout << "trees = " << trees.size() << endl;
 		for (int i = 0; i < trees.size()-1; i++) {
 			for (int j = i; j < trees.size()-1; j++) {
-				cout << "i,j: " << i << "," << j << endl;
+				//cout << "i,j: " << i << "," << j << endl;
 				cout << "f" << i;
 				if (equal[i][j]) {
 					cout << " == ";
@@ -523,7 +517,6 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
-	//cout << "end" << endl;
 
 	return 0;
 }
