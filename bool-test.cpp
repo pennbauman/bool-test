@@ -64,11 +64,14 @@ node* parse(string s) {
 			fin->right = NULL;
 			return fin;
 		}
+		delete fin;
 		return NULL;
 	}
 	// Check parentheses
-	if ((s[0] == '(') && (s[s.size() -1] == ')'))
+	if ((s[0] == '(') && (s[s.size() -1] == ')')) {
+		delete fin;
 		return parse(s.substr(1, s.size() - 2));
+	}
 	// IMP
 	// ! NOT IMPLEMENTED
 
@@ -84,8 +87,10 @@ node* parse(string s) {
 				fin->data = "XOR";
 				fin->left = parse(s.substr(0,i));
 				fin->right = parse(s.substr(i+3));
-				if ((fin->left == NULL) || (fin->right == NULL))
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
 					return NULL;
+				}
 				return fin;
 			}
 		}
@@ -102,16 +107,20 @@ node* parse(string s) {
 				fin->data = "XNOR";
 				fin->left = parse(s.substr(0,i));
 				fin->right = parse(s.substr(i+1));
-				if ((fin->left == NULL) || (fin->right == NULL))
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
 					return NULL;
+				}
 				return fin;
 			}
 			if (s.substr(i,4) == "XNOR") {
 				fin->data = "XNOR";
 				fin->left = parse(s.substr(0,i));
 				fin->right = parse(s.substr(i+4));
-				if ((fin->left == NULL) || (fin->right == NULL))
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
 					return NULL;
+				}
 				return fin;
 			}
 		}
@@ -128,16 +137,20 @@ node* parse(string s) {
 				fin->data = "OR";
 				fin->left = parse(s.substr(0,i));
 				fin->right = parse(s.substr(i+1));
-				if ((fin->left == NULL) || (fin->right == NULL))
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
 					return NULL;
+				}
 				return fin;
 			}
 			if (s.substr(i,2) == "OR") {
 				fin->data = "OR";
 				fin->left = parse(s.substr(0,i));
 				fin->right = parse(s.substr(i+2));
-				if ((fin->left == NULL) || (fin->right == NULL))
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
 					return NULL;
+				}
 				return fin;
 			}
 		}
@@ -154,8 +167,10 @@ node* parse(string s) {
 				fin->data = "NOR";
 				fin->left = parse(s.substr(0,i));
 				fin->right = parse(s.substr(i+3));
-				if ((fin->left == NULL) || (fin->right == NULL))
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
 					return NULL;
+				}
 				return fin;
 			}
 		}
@@ -172,16 +187,20 @@ node* parse(string s) {
 				fin->data = "AND";
 				fin->left = parse(s.substr(0,i));
 				fin->right = parse(s.substr(i+1));
-				if ((fin->left == NULL) || (fin->right == NULL))
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
 					return NULL;
+				}
 				return fin;
 			}
 			if (s.substr(i,3) == "AND") {
 				fin->data = "AND";
 				fin->left = parse(s.substr(0,i));
 				fin->right = parse(s.substr(i+3));
-				if ((fin->left == NULL) || (fin->right == NULL))
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
 					return NULL;
+				}
 				return fin;
 			}
 		}
@@ -198,8 +217,10 @@ node* parse(string s) {
 				fin->data = "NAND";
 				fin->left = parse(s.substr(0,i));
 				fin->right = parse(s.substr(i+4));
-				if ((fin->left == NULL) || (fin->right == NULL))
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
 					return NULL;
+				}
 				return fin;
 			}
 		}
@@ -210,15 +231,19 @@ node* parse(string s) {
 			fin->data = "NOT";
 			fin->left = NULL;
 			fin->right = parse(s.substr(1));
-			if (fin->right == NULL)
+			if (fin->right == NULL) {
+				delete fin;
 				return NULL;
+			}
 			return fin;
 		} else {
 			fin->data = "AND";
 			fin->left = parse(s.substr(0,2));
 			fin->right = parse(s.substr(2));
-			if ((fin->left == NULL) || (fin->right == NULL))
+			if ((fin->left == NULL) || (fin->right == NULL)) {
+				delete fin;
 				return NULL;
+			}
 			return fin;
 		}
 	}
@@ -227,26 +252,34 @@ node* parse(string s) {
 			fin->data = "NOT";
 			fin->left = NULL;
 			fin->right = parse(s.substr(4));
-			if (fin->right == NULL)
+			if (fin->right == NULL) {
+				delete fin;
 				return NULL;
+			}
 			return fin;
 		} else {
 			fin->data = "AND";
 			fin->left = parse(s.substr(0,4));
 			fin->right = parse(s.substr(4));
-			if ((fin->left == NULL) || (fin->right == NULL))
+			if ((fin->left == NULL) || (fin->right == NULL)) {
+				delete fin;
 				return NULL;
+			}
 			return fin;
 		}
 	}
 	// Symbolless AND
-	if (s.size() < 2)
+	if (s.size() < 2) {
+		delete fin;
 		return NULL;
+	}
 	fin->data = "AND";
 	fin->left = parse(s.substr(0,1));
 	fin->right = parse(s.substr(1));
-	if ((fin->left == NULL) || (fin->right == NULL))
+	if ((fin->left == NULL) || (fin->right == NULL)) {
+		delete fin;
 		return NULL;
+	}
 	return fin;
 }
 
@@ -270,7 +303,7 @@ void printTree(node* n) {
 // Delete tree
 void deleteTree(node* root) {
 	if (root == NULL)
-		return
+		return;
 	deleteTree(root->left);
 	deleteTree(root->right);
 	delete root;
@@ -285,7 +318,7 @@ bool evaluate(node* n, bool vars[]) {
 	}
 	// Check if variable
 	if (n->data.size() == 1) {
-		return vars[n->data[0]];
+		return vars[n->data[0] - 97];
 	}
 	// Check operations
 	if (n->data == "NOT")
@@ -341,9 +374,9 @@ int main(int argc, char* argv[]) {
 				cout << "ERROR: Syntax in '" << current << "' is not interpretable" << endl;
 				return 1;
 			}
-			cout << "f" << i << " = ";
-			printTree(trees[i-1]);
-			cout << endl;
+			//cout << "f" << i << " = ";
+			//printTree(trees[i-1]);
+			//cout << endl;
 			total += current;
 		}
 	}
@@ -407,7 +440,7 @@ int main(int argc, char* argv[]) {
 	cout << endl;
 	for (int i = 0; i < vars.size(); i++) {
 		cout << vars[i] << " ";
-		vars_values[vars[i]] = false;
+		vars_values[vars[i] - 97] = false;
 	}
 	cout << "num";
 	for (int i = 0; i < trees.size(); i++) {
@@ -417,18 +450,22 @@ int main(int argc, char* argv[]) {
 
 	// Iterate over combinations and compute
 	bool equal[trees.size()-1][trees.size()-1];
-	for (int i = 0; i < trees.size()-1; i++) {
-		for (int j = i; j < trees.size()-1; j++) {
-			equal[i][j] = true;
+	if (options[1]) {
+		//cout << "trees = " << trees.size() << endl;
+		for (int i = 0; i < trees.size()-1; i++) {
+			for (int j = i; j < trees.size()-1; j++) {
+				equal[i][j] = true;
+			}
 		}
 	}
 	bool results[trees.size()];
 	bool done;
 	int num = 0;
+	char c;
 	while (true) {
 		// Print current combination data
 		for (int i = 0; i < vars.size(); i++) {
-			cout << vars_values[vars[i]] << " ";
+			cout << vars_values[vars[i] - 97] << " ";
 		}
 		printf("%3d", num);
 		num++;
@@ -440,19 +477,21 @@ int main(int argc, char* argv[]) {
 		cout << endl;
 
 		// Check expression equalities
-		for (int i = 0; i < trees.size()-1; i++) {
-			for (int j = i; j < trees.size()-1; j++) {
-				equal[i][j] = equal[i][j] && (results[i] == results[j+1]);
+		if (options[1]) {
+			for (int i = 0; i < trees.size()-1; i++) {
+				for (int j = i; j < trees.size()-1; j++) {
+					equal[i][j] = equal[i][j] && (results[i] == results[j+1]);
+				}
 			}
 		}
 
 		// Move to next combination, and check final state
 		done = true;
 		for (int i = 0; i < vars.size(); i++) {
-			if (vars_values[vars[i]]) {
-				vars_values[vars[i]] = false;
+			if (vars_values[vars[i] - 97]) {
+				vars_values[vars[i] - 97] = false;
 			} else {
-				vars_values[vars[i]] = true;
+				vars_values[vars[i] - 97] = true;
 				done = false;
 				break;
 			}
@@ -465,12 +504,15 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < trees.size(); i++) {
 		deleteTree(trees[i]);
 	}
+	//cout << "deleted" << endl;
 
 	// Print funtion equalities
 	if (options[1]) {
 		cout << endl;
+		cout << "trees = " << trees.size() << endl;
 		for (int i = 0; i < trees.size()-1; i++) {
 			for (int j = i; j < trees.size()-1; j++) {
+				cout << "i,j: " << i << "," << j << endl;
 				cout << "f" << i;
 				if (equal[i][j]) {
 					cout << " == ";
@@ -481,6 +523,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
+	//cout << "end" << endl;
 
 	return 0;
 }
