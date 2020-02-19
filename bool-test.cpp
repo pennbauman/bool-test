@@ -399,16 +399,17 @@ int main(int argc, char* argv[]) {
 			}
 			total += current;
 		}
+		cout << endl;
 	}
 
 	// Parse expressions into parse-trees
 	if (options[0]) {
-		cout << endl;
 		for (int i = 0; i < trees.size(); i++) {
 			cout << "f" << i << " = ";
 			printTree(trees[i]);
 			cout << endl;
 		}
+		cout << endl;
 	}
 
 	// Detect variables, and sort into vector
@@ -434,7 +435,6 @@ int main(int argc, char* argv[]) {
 		cout << "WARNING: More than 9 variables may result in formating problems" << endl;
 
 	// Print table header
-	cout << endl;
 	for (int i = 0; i < vars.size(); i++) {
 		cout << vars[i] << " ";
 		vars_values[vars[i] - 97] = false;
