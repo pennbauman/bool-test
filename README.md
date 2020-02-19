@@ -35,12 +35,12 @@ Expressions are composed of variables (any lowercase English letter) and operato
 | --------: | :---- |
 | `()`      | Forces order of evaluation |
 | `NOT` `!` `~` | Negation |
-| `NAND`    | Negated conjunction (not and) |
 | `AND` `&` `*` | Conjunction |
-| `NOR`     | Negated disjunction (not or) |
+| `NAND`    | Negated conjunction (not and) |
 | `OR` `\|` `+`  | Disjunction |
-| `XNOR` `=`  | Equivalence or negated exclusive or (not xor) |
+| `NOR`     | Negated disjunction (not or) |
 | `XOR`     | Exclusive or |
+| `XNOR` `=`  | Equivalence or negated exclusive or (not xor) |
 
 
 ## Python version

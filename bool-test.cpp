@@ -30,12 +30,12 @@ void printHelp() {
 	cout << "  Operators must be all uppercase, and are listed in their order of evaluation." << endl;
 	cout << "    ()         Forces order of evaluation" << endl;
 	cout << "    NOT, !, ~  Negation" << endl;
-	cout << "    NAND       Negated conjunction (not and)" << endl;
 	cout << "    AND, &, *  Conjunction" << endl;
-	cout << "    NOR        Negated disjunction (not or)" << endl;
+	cout << "    NAND       Negated conjunction (not and)" << endl;
 	cout << "    OR, |, +   Disjunction" << endl;
-	cout << "    XNOR, =    Equivalence or negated exclusive or (not xor)" << endl;
+	cout << "    NOR        Negated disjunction (not or)" << endl;
 	cout << "    XOR        Exclusive or" << endl;
+	cout << "    XNOR, =    Equivalence or negated exclusive or (not xor)" << endl;
 }
 
 // Recursive construct parse-tree
@@ -69,35 +69,29 @@ node* parse(string s) {
 	}
 	// Check parentheses
 	if ((s[0] == '(') && (s[s.size() -1] == ')')) {
-		delete fin;
-		return parse(s.substr(1, s.size() - 2));
+		bool surrounding = true;
+		p = 1;
+		for (int i = 1; i < s.size()-1; i++) {
+			if (s[i] == '(')
+				p++;
+			if (s[i] == ')')
+				p--;
+			if (p == 0) {
+				surrounding = false;
+				break;
+			}
+		}
+		if (surrounding) {
+			delete fin;
+			return parse(s.substr(1, s.size() - 2));
+		}
 	}
 	// IMP
 	// ! NOT IMPLEMENTED
 
-	// XOR
-	p = 0;
-	for (int i = 1; i < s.size()-1; i++) {
-		if (s[i] == '(')
-			p++;
-		if (s[i] == ')')
-			p--;
-		if (p == 0) {
-			if (s.substr(i,3) == "XOR") {
-				fin->data = "XOR";
-				fin->left = parse(s.substr(0,i));
-				fin->right = parse(s.substr(i+3));
-				if ((fin->left == NULL) || (fin->right == NULL)) {
-					delete fin;
-					return NULL;
-				}
-				return fin;
-			}
-		}
-	}
 	// EQV, XNOR
 	p = 0;
-	for (int i = 1; i < s.size()-1; i++) {
+	for (int i = 0; i < s.size()-1; i++) {
 		if (s[i] == '(')
 			p++;
 		if (s[i] == ')')
@@ -125,9 +119,49 @@ node* parse(string s) {
 			}
 		}
 	}
+	// XOR
+	p = 0;
+	for (int i = 0; i < s.size()-1; i++) {
+		if (s[i] == '(')
+			p++;
+		if (s[i] == ')')
+			p--;
+		if (p == 0) {
+			if (s.substr(i,3) == "XOR") {
+				fin->data = "XOR";
+				fin->left = parse(s.substr(0,i));
+				fin->right = parse(s.substr(i+3));
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
+					return NULL;
+				}
+				return fin;
+			}
+		}
+	}
+	// NOR
+	p = 0;
+	for (int i = 0; i < s.size()-1; i++) {
+		if (s[i] == '(')
+			p++;
+		if (s[i] == ')')
+			p--;
+		if (p == 0) {
+			if (s.substr(i,3) == "NOR") {
+				fin->data = "NOR";
+				fin->left = parse(s.substr(0,i));
+				fin->right = parse(s.substr(i+3));
+				if ((fin->left == NULL) || (fin->right == NULL)) {
+					delete fin;
+					return NULL;
+				}
+				return fin;
+			}
+		}
+	}
 	// OR
 	p = 0;
-	for (int i = 1; i < s.size()-1; i++) {
+	for (int i = 0; i < s.size()-1; i++) {
 		if (s[i] == '(')
 			p++;
 		if (s[i] == ')')
@@ -155,18 +189,18 @@ node* parse(string s) {
 			}
 		}
 	}
-	// NOR
+	// NAND
 	p = 0;
-	for (int i = 1; i < s.size()-1; i++) {
+	for (int i = 0; i < s.size()-1; i++) {
 		if (s[i] == '(')
 			p++;
 		if (s[i] == ')')
 			p--;
 		if (p == 0) {
-			if (s.substr(i,3) == "NOR") {
-				fin->data = "NOR";
+			if (s.substr(i,4) == "NAND") {
+				fin->data = "NAND";
 				fin->left = parse(s.substr(0,i));
-				fin->right = parse(s.substr(i+3));
+				fin->right = parse(s.substr(i+4));
 				if ((fin->left == NULL) || (fin->right == NULL)) {
 					delete fin;
 					return NULL;
@@ -177,7 +211,7 @@ node* parse(string s) {
 	}
 	// AND
 	p = 0;
-	for (int i = 1; i < s.size()-1; i++) {
+	for (int i = 0; i < s.size()-1; i++) {
 		if (s[i] == '(')
 			p++;
 		if (s[i] == ')')
@@ -197,26 +231,6 @@ node* parse(string s) {
 				fin->data = "AND";
 				fin->left = parse(s.substr(0,i));
 				fin->right = parse(s.substr(i+3));
-				if ((fin->left == NULL) || (fin->right == NULL)) {
-					delete fin;
-					return NULL;
-				}
-				return fin;
-			}
-		}
-	}
-	// NAND
-	p = 0;
-	for (int i = 1; i < s.size()-1; i++) {
-		if (s[i] == '(')
-			p++;
-		if (s[i] == ')')
-			p--;
-		if (p == 0) {
-			if (s.substr(i,4) == "NAND") {
-				fin->data = "NAND";
-				fin->left = parse(s.substr(0,i));
-				fin->right = parse(s.substr(i+4));
 				if ((fin->left == NULL) || (fin->right == NULL)) {
 					delete fin;
 					return NULL;
